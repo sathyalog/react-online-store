@@ -5,15 +5,14 @@ import Order from './Order';
 
 
 class App extends React.Component {
-    state = {}
     render() { 
         return (
             <div className="catch-of-the-day">
                 <div className="menu">
-                    <Header/>
+                    <Header tagline="Fresh Sea Food"/>
                 </div>
-                <Inventory/>
                 <Order/>
+                <Inventory/>
             </div>
         )
     }
