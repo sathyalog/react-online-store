@@ -18,4 +18,5 @@ ref allows us to react to reference an actual dom node on the page.
 
 stateless arrow function syntax can be used instead of regular class XYZ extends React.Component. 
 > const Header = (props) => ();
+
 For more check this [article](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc).
