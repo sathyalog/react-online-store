@@ -60,7 +60,7 @@ export function getFunName() {
     "worried"
   ];
 
-  const nouns = [
+  /*const nouns = [
     "women",
     "men",
     "children",
@@ -93,5 +93,6 @@ export function getFunName() {
     "data"
   ];
 
-  return `${rando(adjectives)}-${rando(adjectives)}-${rando(nouns)}`;
+  return `${rando(adjectives)}-${rando(adjectives)}-${rando(nouns)}`;*/
+  return `${rando(adjectives)}`;
 }

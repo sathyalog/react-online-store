@@ -10,6 +10,8 @@ props - props are like html attributes and pass this to any component. so, compo
 
 state is an object that lives with the component and responsible for keeping track of changing data within component. that change could be result of user interaction like click etc.
 
+In other words, state is an object that lives inside a component and holds the data for self need or for its children. 
+
 ## what is ref?
 
 ref allows us to react to reference an actual dom node on the page.
