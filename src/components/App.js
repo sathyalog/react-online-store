@@ -10,7 +10,9 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
-
+import GridList from '@material-ui/core/GridList';
+import Item from './Item';
+import sampleData from "../sample-data";
 
 class App extends React.Component {
     state = {
@@ -28,6 +30,10 @@ class App extends React.Component {
             items: items
         })
     }
+
+    loadSampleItems = () => {
+        this.setState({ items: sampleData });
+    };
 
     handleChange = () => {
         this.setState(state => ({ icon:!this.state.icon }));
@@ -55,9 +61,14 @@ class App extends React.Component {
                         </Typography>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <Inventory addItem={this.addItem} />
+                        <Inventory addItem={this.addItem} 
+                        loadSampleItems={this.loadSampleItems}/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
+                <GridList style={{flexWrap: 'wrap',transform: 'translateZ(0)'}} cols={2.5}>
+                   {Object.keys(this.state.items).map(key => 
+                   <Item key={key} details={this.state.items[key]}/>)}
+                </GridList>
             </Paper>
         </MuiThemeProvider>
     )

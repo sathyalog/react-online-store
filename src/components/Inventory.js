@@ -5,6 +5,9 @@ class Inventory extends React.Component {
         return (
             <div className="inventory">
                 <AddItem addItem = {this.props.addItem}></AddItem> 
+                <button onClick={this.props.loadSampleItems}>
+                        Load Sample Items
+                </button>
             </div>
         );
     }
