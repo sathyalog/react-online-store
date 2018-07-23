@@ -5,31 +5,39 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import {formatPrice} from '../helpers';
+import Icon from '@material-ui/core/Icon';
 
 class Item extends React.Component {
     render() {
+        const { image, name, desc, price, status } = this.props.details;
+        const isAvailable = status === 'available';
         return(
             <div>
                 <Card style={{maxWidth: 345, margin:'15px'}}>
                     <CardMedia style={{height: 0,paddingTop: '56.25%'}}
-                    image={this.props.details.image}
-                    title={this.props.details.name}
+                    image={image}
+                    title={name}
                     />
                     <CardContent>
                     <Typography gutterBottom variant="headline" component="h2">
-                    {this.props.details.name}
+                    {name}
                     </Typography>
                     <Typography component="p">
-                    {this.props.details.desc}
+                    {desc}
                     </Typography>
                     </CardContent>
                     <CardActions>
-                    <Button size="small" color="primary">
-                        Add to Cart
+                    <Button size="small" color="primary" 
+                    disabled={!isAvailable} 
+                    style={{fontWeight:'800'}}
+                    onClick={ () => this.props.addToOrder(this.props.index)}
+                    >
+                        {isAvailable ? "Add To Cart" : "Sold Out!"}
                     </Button>
-                    <Button size="small" color="primary">
-                        Add to Favorite
-                    </Button>
+                    <Typography style={{fontSize:'15px',fontWeight:'500', marginLeft:'170px', color:'black'}}>
+                    {formatPrice(price)}
+                    </Typography>
                     </CardActions>
                 </Card>
             </div>

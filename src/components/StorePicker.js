@@ -20,7 +20,6 @@ class StorePicker extends React.Component {
         return (
             <React.Fragment>
                 { /* Use React.Fragment instead of div to avoid unnecessary elements on DOM */}
-                <Navbar />
                 <Paper style={{ padding: '20px' }} elevation={1}>
                     <form className="store-selector" onSubmit={this.goToStore}>
                         <Typography variant="headline" gutterBottom>

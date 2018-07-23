@@ -4,6 +4,7 @@ import blue from '@material-ui/core/colors/blue';
 import pink from '@material-ui/core/colors/pink';
 import Header from './Header';
 import Inventory from './Inventory';
+import Order from './Order';
 import Navbar from './Navbar';
 import Paper from '@material-ui/core/Paper';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -39,6 +40,15 @@ class App extends React.Component {
         this.setState(state => ({ icon:!this.state.icon }));
     };
 
+    addToOrder = (key) => {
+        //1.copy of state
+        const order = {...this.state.order};
+        //2. either add to the order, or update the number to order
+        order[key] = order[key] + 1 || 1;
+        //3. call setState to update our state object
+        this.setState({order:order})
+    }
+
     render() {
         const theme = createMuiTheme({
             palette: {
@@ -49,7 +59,6 @@ class App extends React.Component {
         });
     return (
         <MuiThemeProvider theme={theme}>
-            <Navbar />
             <Paper style={{ padding: '20px' }} elevation={1}>
                 <Header tagline="Fresh Groceries" />
                 <ExpansionPanel>
@@ -67,7 +76,9 @@ class App extends React.Component {
                 </ExpansionPanel>
                 <GridList style={{flexWrap: 'wrap',transform: 'translateZ(0)'}} cols={2.5}>
                    {Object.keys(this.state.items).map(key => 
-                   <Item key={key} details={this.state.items[key]}/>)}
+                   <Item key={key} index={key} details={this.state.items[key]}
+                   addToOrder = {this.addToOrder}/>)}
+                   <Order orderDetails = {this.state.order}/>
                 </GridList>
             </Paper>
         </MuiThemeProvider>
