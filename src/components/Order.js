@@ -1,7 +1,7 @@
 import React from 'react';
 import Cart from './Cart';
-import Navbar from './Navbar';
-import Paper from '@material-ui/core/Paper';
+import {CartContext} from './CartContext';
+
 class Order extends React.Component {
     state = {
         order:{}
@@ -13,11 +13,10 @@ class Order extends React.Component {
     }
     render() {
         return (
-            <div className="order">
-               <Cart cartDetails={this.props.orderDetails}/>
-            </div>
+            <CartContext.Provider value={this.state}>
+                <Cart/>
+            </CartContext.Provider>
         );
     }
 }
-
 export default Order;

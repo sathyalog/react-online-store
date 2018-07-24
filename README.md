@@ -22,3 +22,7 @@ stateless arrow function syntax can be used instead of regular class XYZ extends
 > const Header = (props) => ();
 
 For more check this [article](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc).
+
+## React Context
+
+Explained clearly on official documention: https://reactjs.org/docs/context.html#dynamic-context
