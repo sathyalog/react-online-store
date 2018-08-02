@@ -5,7 +5,6 @@ import pink from '@material-ui/core/colors/pink';
 import Header from './Header';
 import Inventory from './Inventory';
 import Order from './Order';
-import Navbar from './Navbar';
 import Paper from '@material-ui/core/Paper';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -13,7 +12,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import Item from './Item';
-import sampleData from "../sample-data";
+import sampleData, { productImage } from "../sample-data";
 
 class App extends React.Component {
     state = {
@@ -33,7 +32,8 @@ class App extends React.Component {
     }
 
     loadSampleItems = () => {
-        this.setState({ items: sampleData });
+        this.setState({ items: sampleData,
+        image: productImage });
     };
 
     handleChange = () => {
@@ -78,8 +78,8 @@ class App extends React.Component {
                    {Object.keys(this.state.items).map(key => 
                    <Item key={key} index={key} details={this.state.items[key]}
                    addToOrder = {this.addToOrder}/>)}
-                   <Order orderDetails = {this.state.order}/>
-                </GridList>
+                <Order orderDetails = {this.state.order} image={this.state.image}/>
+                </GridList>  
             </Paper>
         </MuiThemeProvider>
     )

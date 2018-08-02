@@ -20,11 +20,11 @@ const Navbar = () => {
                         <Icon color="action">
                             <i className="material-icons md-light" style={{ color: 'white', verticalAlign: 'middle', position: 'absolute', top: '22px', float: 'right', }}>search</i>
                         </Icon>
-                        <Icon color="action">
+                        {/* <Icon color="action">
                             {/* <Badge  badgeContent={4} color="primary"> */}
-                            <i className="material-icons md-light" style={{ color: 'white', verticalAlign: 'middle', position: 'absolute', top: '22px', float: 'right', padding: '0 10px' }}><Link to="/cart" style={{ color: 'white', textDecoration: 'none' }}>shopping_cart</Link></i>
-                            {/* </Badge> */}
-                        </Icon>
+                            {/*<i className="material-icons md-light" style={{ color: 'white', verticalAlign: 'middle', position: 'absolute', top: '22px', float: 'right', padding: '0 10px' }}><Link to="/cart" style={{ color: 'white', textDecoration: 'none' }}>shopping_cart</Link></i>
+                            {/* </Badge> 
+                        </Icon> */}
                     </div>
                 </Toolbar>
             </AppBar>

@@ -80,5 +80,7 @@ const items = {
       status: "available"
     }
   };
+
+  export const productImage = '/images/product-6.png'
   
   export default items;

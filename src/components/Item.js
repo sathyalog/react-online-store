@@ -6,14 +6,13 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {formatPrice} from '../helpers';
-import Icon from '@material-ui/core/Icon';
 
 class Item extends React.Component {
     render() {
         const { image, name, desc, price, status } = this.props.details;
         const isAvailable = status === 'available';
         return(
-            <div>
+            <div style={{width:'370px'}}>
                 <Card style={{maxWidth: 345, margin:'15px'}}>
                     <CardMedia style={{height: 0,paddingTop: '56.25%'}}
                     image={image}
@@ -33,9 +32,9 @@ class Item extends React.Component {
                     style={{fontWeight:'800'}}
                     onClick={ () => this.props.addToOrder(this.props.index)}
                     >
-                        {isAvailable ? "Add To Cart" : "Sold Out!"}
+                        <i className="material-icons">add_shopping_cart</i>&nbsp; {isAvailable ? "Add To Cart" : "Sold Out!"}
                     </Button>
-                    <Typography style={{fontSize:'15px',fontWeight:'500', marginLeft:'170px', color:'black'}}>
+                    <Typography style={{fontSize:'15px',fontWeight:'500', marginLeft:'150px', color:'black'}}>
                     {formatPrice(price)}
                     </Typography>
                     </CardActions>
