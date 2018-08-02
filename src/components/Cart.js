@@ -3,6 +3,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {formatPrice} from '../helpers';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 class Cart extends React.Component {
     render() {
@@ -13,11 +18,7 @@ class Cart extends React.Component {
         },
         removeicon: {
           fontSize:'18px', 
-          flex:1, 
-          height:'40px',
-          lineHeight:'40px', 
-          textAlign:'center', 
-          margin:'10px'
+          flex:1
         },
         cartcontent:{
           margin:'5px 20px', 
@@ -26,7 +27,11 @@ class Cart extends React.Component {
         cartproperties:{
           margin:'20px 0',
           right:'5px',
-          position:'fixed'}
+          position:'fixed'
+        },
+        td: {
+          padding: '5px'
+        }
         
       }
         
@@ -48,19 +53,27 @@ class Cart extends React.Component {
                   <ul style={{listStyleType:'none',padding: 0}}>
                   {items.map(function(item,i){
                         return <li key={i}>
-                        <div>
+                        <TableRow>
+                        <TableCell style={styles.td}>
                         <i className="material-icons" style={styles.removeicon}>remove_circle_outline</i>
-                        <img
+                        </TableCell>
+                        <TableCell style={styles.td}><img
                           style={styles.cover}
                           src={image}
                           alt="Product"
-                        />
-                        <div style={{display:'inline-block'}}>
-                        <span>{item[1].details.name}</span>
-                        <span>{formatPrice(item[1].details.price)}</span><br/>
-                        <span>Quantity: {item[1].quantity}</span>
-                        </div>
-                        </div>
+                        /></TableCell>
+                        {/* <div style={{display:'inline-block'}}> */}
+                        <TableCell style={styles.td}>
+                          <div>
+                          <span>
+                            {item[1].details.name}
+                          </span><br/>
+                          Quantity: {item[1].quantity}
+                          </div>
+                        
+                        </TableCell>
+                        <TableCell style={styles.td}>{formatPrice(item[1].details.price * item[1].quantity)}</TableCell>      
+                        </TableRow>
                         </li>
                     })}
                   </ul>  
