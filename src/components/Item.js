@@ -30,7 +30,7 @@ class Item extends React.Component {
                     <Button size="small" color="primary" 
                     disabled={!isAvailable} 
                     style={{fontWeight:'800'}}
-                    onClick={ () => this.props.addToOrder(this.props.index)}
+                    onClick={ () => this.props.addToOrder(this.props.index,this.props.details)}
                     >
                         <i className="material-icons">add_shopping_cart</i>&nbsp; {isAvailable ? "Add To Cart" : "Sold Out!"}
                     </Button>

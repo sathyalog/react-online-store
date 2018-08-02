@@ -40,11 +40,22 @@ class App extends React.Component {
         this.setState(state => ({ icon:!this.state.icon }));
     };
 
-    addToOrder = (key) => {
+    addToOrder = (key,details) => {
         //1.copy of state
         const order = {...this.state.order};
         //2. either add to the order, or update the number to order
-        order[key] = order[key] + 1 || 1;
+        const item = { "key": key,
+                       "details":details,
+                        "quantity":1
+                    };
+        
+        if(order[key] && item.key === order[key].key) {
+            order[key].quantity = order[key].quantity + 1;
+        } else {
+            order[key] = item;
+        }
+        
+        
         //3. call setState to update our state object
         this.setState({order:order})
     }

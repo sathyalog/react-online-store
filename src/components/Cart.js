@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import {formatPrice} from '../helpers';
 
 class Cart extends React.Component {
     render() {
@@ -30,7 +31,9 @@ class Cart extends React.Component {
       }
         
         const image  = this.props.image;
-        const items = Object.keys(this.props.details)
+        
+        const items = Object.entries(this.props.details)
+        console.log(items)
         return (
             <div style={styles.cartproperties}>
             <Card>
@@ -42,13 +45,26 @@ class Cart extends React.Component {
                   </Typography>
                 </CardContent>
                 <div style={styles.cartcontent}>
-                    <i class="material-icons" style={styles.removeicon}>remove_circle_outline</i>
-                    <img
-                      style={styles.cover}
-                      src={image}
-                      alt="Product"
-                    />
-                    <span>{items}</span>
+                  <ul style={{listStyleType:'none',padding: 0}}>
+                  {items.map(function(item,i){
+                        return <li key={i}>
+                        <div>
+                        <i className="material-icons" style={styles.removeicon}>remove_circle_outline</i>
+                        <img
+                          style={styles.cover}
+                          src={image}
+                          alt="Product"
+                        />
+                        <div style={{display:'inline-block'}}>
+                        <span>{item[1].details.name}</span>
+                        <span>{formatPrice(item[1].details.price)}</span><br/>
+                        <span>Quantity: {item[1].quantity}</span>
+                        </div>
+                        </div>
+                        </li>
+                    })}
+                  </ul>  
+                   
                 </div> 
                 
                 
