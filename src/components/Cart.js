@@ -6,7 +6,6 @@ import {formatPrice} from '../helpers';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 class Cart extends React.Component {
@@ -31,14 +30,29 @@ class Cart extends React.Component {
         },
         td: {
           padding: '5px'
+        },
+        total:{
+          fontSize:'12px', 
+          fontWeight:'500'
+        },
+        alignRight: {
+          float: 'right'
         }
         
       }
         
         const image  = this.props.image;
-        
-        const items = Object.entries(this.props.details)
-        console.log(items)
+        const items = Object.entries(this.props.details);
+        const orderIds = Object.keys(this.props.details);
+        const total = orderIds.reduce((prevTotal,key)=>{
+          const item = this.props.items[key];
+          const count = this.props.details[key];
+          const isAvailable = item && item.status === 'available';
+          if(isAvailable) {
+            return prevTotal + (count.quantity * item.price);
+          }
+          return prevTotal;
+        },0)
         return (
             <div style={styles.cartproperties}>
             <Card>
@@ -49,11 +63,10 @@ class Cart extends React.Component {
                     Your Orders
                   </Typography>
                 </CardContent>
-                <div style={styles.cartcontent}>
-                  <ul style={{listStyleType:'none',padding: 0}}>
+                <Table style={styles.cartcontent}>
+                  <TableBody>
                   {items.map(function(item,i){
-                        return <li key={i}>
-                        <TableRow>
+                        return <TableRow key={i}>
                         <TableCell style={styles.td}>
                         <i className="material-icons" style={styles.removeicon}>remove_circle_outline</i>
                         </TableCell>
@@ -62,30 +75,30 @@ class Cart extends React.Component {
                           src={image}
                           alt="Product"
                         /></TableCell>
-                        {/* <div style={{display:'inline-block'}}> */}
-                        <TableCell style={styles.td}>
+                        {item[1].details.status === 'available' ? <TableCell style={styles.td}>
                           <div>
                           <span>
                             {item[1].details.name}
                           </span><br/>
                           Quantity: {item[1].quantity}
                           </div>
+                        </TableCell> : <TableCell style={styles.td}>
+                           {item? item[1].details.name : 'item'} is <br/>  no longer available
+                        </TableCell>}
                         
-                        </TableCell>
-                        <TableCell style={styles.td}>{formatPrice(item[1].details.price * item[1].quantity)}</TableCell>      
-                        </TableRow>
-                        </li>
+                        <TableCell style={styles.td}>{item[1].details.status === 'available' ? formatPrice(item[1].details.price * item[1].quantity): formatPrice(0)}</TableCell>
+                        </TableRow> 
                     })}
-                  </ul>  
-                   
-                </div> 
-                
-                
+                    <div style={styles.alignRight}>
+                    <TableCell style={styles.total}>
+                        Total: {formatPrice(total)}
+                    </TableCell>       
+                    </div>
+                  </TableBody>     
+                </Table>
               </div>
-              
             </Card>
-          </div>
-                
+          </div>     
         );
     }
 }

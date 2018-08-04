@@ -89,7 +89,7 @@ class App extends React.Component {
                    {Object.keys(this.state.items).map(key => 
                    <Item key={key} index={key} details={this.state.items[key]}
                    addToOrder = {this.addToOrder}/>)}
-                <Order orderDetails = {this.state.order} image={this.state.image}/>
+                <Order orderDetails = {this.state.order} image={this.state.image} items={this.state.items}/>
                 </GridList>  
             </Paper>
         </MuiThemeProvider>

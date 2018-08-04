@@ -15,7 +15,8 @@ class Order extends React.Component {
         return (
             <CartContext.Provider value={this.state}>
                 <Cart image={this.props.image}
-                    details={this.state.order} />
+                    details={this.state.order}
+                    items={this.props.items} />
             </CartContext.Provider>
         );
     }

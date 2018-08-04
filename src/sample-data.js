@@ -59,7 +59,7 @@ const items = {
       image: "/images/7.jpg",
       desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       price: 2543,
-      status: "available"
+      status: "unavailable"
     },
   
     item8: {
