@@ -24,13 +24,28 @@ class App extends React.Component {
 
     componentDidMount() {
         const {params} = this.props.match;
+        const localStorageRef = localStorage.getItem(params.storeId);
+        if(localStorageRef) {
+            this.setState({order: JSON.parse(localStorageRef)})
+        }
         this.ref = base.syncState(`${params.storeId}/items`,{
             context: this,
             state:'items'
         });
+
+        this.imageRef = base.syncState(`${params.storeId}/productImage`,{
+            context: this,
+            state:'image'
+        });
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem(this.props.match.params.storeId,JSON.stringify(this.state.order));
+        console.log('Component Updated');
     }
 
     componentWillUnmount() {
+        console.log('Component Unmounted')
         base.removeBinding(this.ref);
     }
 
@@ -68,8 +83,6 @@ class App extends React.Component {
         } else {
             order[key] = item;
         }
-        
-        
         //3. call setState to update our state object
         this.setState({order:order})
     }
