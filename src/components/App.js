@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import Item from './Item';
 import sampleData, { productImage } from "../sample-data";
+import base from '../base';
 
 class App extends React.Component {
     state = {
@@ -20,6 +21,19 @@ class App extends React.Component {
         order: {},
         icon: true
     }
+
+    componentDidMount() {
+        const {params} = this.props.match;
+        this.ref = base.syncState(`${params.storeId}/items`,{
+            context: this,
+            state:'items'
+        });
+    }
+
+    componentWillUnmount() {
+        base.removeBinding(this.ref);
+    }
+
     addItem = (Item) => {
         //1. take a copy of existing state
         const items = { ...this.state.items };
