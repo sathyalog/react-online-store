@@ -2,24 +2,24 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import StorePicker from './StorePicker';
 import App from './App';
-// import Cart from './Cart';
+import Inventory from './Inventory';
 import Navbar from './Navbar';
 import NotFound from './NotFound';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 const history = createBrowserHistory()
 
-const Router = () => (
+const Router = (props) => (
     <BrowserRouter history={history}>
-    <div>
+    <React.Fragment>
     <Navbar/>    
     <Switch>
             <Route exact path="/" component={StorePicker} />
-            <Route path="/store/:storeId" component={App} />
-            {/* <Route path="/cart" exact component={Cart} /> */}
-            <Route component={NotFound} />
+            <Route path="/store/:storeId" exact component={App} />
+            <Route path="/:storeId/inventory"  exact component={Inventory} />
+            <Route path="*" component={NotFound} />
     </Switch>
-    </div>
+    </React.Fragment>
     </BrowserRouter>
 );
 

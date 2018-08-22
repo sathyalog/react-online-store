@@ -9,6 +9,15 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 class Cart extends React.Component {
+  state = {
+    items: {}
+}
+  componentDidUpdate(prevProps) {
+    if(this.props.items !== prevProps.items){
+      console.log(this.props.items)
+      this.setState({items:this.props.items});
+    }
+  }
     render() {
       const styles = {
         cover: {
@@ -42,6 +51,7 @@ class Cart extends React.Component {
       }
         
         const image  = this.props.image;
+        //const itemsDB = Object.entries(this.state.items);
         const items = Object.entries(this.props.details);
         const orderIds = Object.keys(this.props.details);
         const total = orderIds.reduce((prevTotal,key)=>{
@@ -52,7 +62,14 @@ class Cart extends React.Component {
             return prevTotal + (count.quantity * item.price);
           }
           return prevTotal;
-        },0)
+        },0);
+
+        // const itemUpdate = items.reduce((prevItem,key)=>{
+        //   console.log(prevItem)
+        //   const item = this.props.items[key];
+        //   console.log(item);
+        //   return item;
+        // },0);
         return (
             <div style={styles.cartproperties}>
             <Card>
@@ -75,7 +92,7 @@ class Cart extends React.Component {
                           src={image}
                           alt="Product"
                         /></TableCell>
-                        {item[1].details.status === 'available' ? <TableCell style={styles.td}>
+                        {item[1].details && item[1].details.status === 'available' ? <TableCell style={styles.td}>
                           <div>
                           <span>
                             {item[1].details.name}
@@ -87,7 +104,7 @@ class Cart extends React.Component {
                         </TableCell>}
                         
                         <TableCell style={styles.td}>{item[1].details.status === 'available' ? formatPrice(item[1].details.price * item[1].quantity): formatPrice(0)}</TableCell>
-                        </TableRow> 
+                        </TableRow>
                     })}
                     <div style={styles.alignRight}>
                     <TableCell style={styles.total}>

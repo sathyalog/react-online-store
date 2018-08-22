@@ -42,6 +42,10 @@ class App extends React.Component {
     componentDidUpdate() {
         localStorage.setItem(this.props.match.params.storeId,JSON.stringify(this.state.order));
         console.log('Component Updated');
+        console.log(this.state.items);
+        this.setState({
+            items: this.state.items
+        })
     }
 
     componentWillUnmount() {
@@ -109,7 +113,8 @@ class App extends React.Component {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                         <Inventory addItem={this.addItem} 
-                        loadSampleItems={this.loadSampleItems}/>
+                        loadSampleItems={this.loadSampleItems}
+                        items = {this.state.items}/>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 <GridList style={{flexWrap: 'wrap',transform: 'translateZ(0)'}} cols={2.5}>
